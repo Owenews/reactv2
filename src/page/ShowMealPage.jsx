@@ -15,7 +15,8 @@ const ShowMealPage = () => {
       
       setMeal(urlMealData.meals[0]);
     })();
-  }, [id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
