@@ -16,7 +16,7 @@ const MealsPage = () => {
       const mealsData = await mealsResponse.json();
 
       // Limiter le nombre de résultats à 10 recettes
-      setMeals(mealsData.meals.slice(0, 10));
+      setMeals(mealsData.meals);
     })();
   }, []);
 
