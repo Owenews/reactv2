@@ -1,24 +1,13 @@
-import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MealCard from "../components/MealCard";
 import RandomMealsPage from "./RandomMealsPage";
-
+import useGetMeals from "../hook/useGetMeals.js";
 
 const MealsPage = () => {
-  const [meals, setMeals] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      // Récupérer des recettes commençant par "a"
-      const mealsResponse = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=a"); 
-      // Récupérer les données au format JSON
-      const mealsData = await mealsResponse.json();
+  const { meals } = useGetMeals();
 
-      // Limiter le nombre de résultats à 10 recettes
-      setMeals(mealsData.meals);
-    })();
-  }, []);
 
 
   if (!meals) {
