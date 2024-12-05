@@ -34,7 +34,7 @@ const Header = () => {
                <input type="search" name="query" placeholder="Search for a meal" required />
             </label>
 
-            <input type="submit" />
+            <input type="submit" value="🔍"/>
           </form>
         </nav>
       </header>
