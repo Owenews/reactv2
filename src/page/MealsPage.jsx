@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import RandomMealsPage from "./RandomMealsPage";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import MealCard from "../components/MealCard";
+import RandomMealsPage from "./RandomMealsPage";
 
 
 const MealsPage = () => {
@@ -20,52 +21,28 @@ const MealsPage = () => {
   }, []);
 
 
+  if (!meals) {
+    return (
+      <>
+        <Header />
+        <p>En cours de chargement !</p>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
-    <Header />
-    <main>
-        <h1>Welcome to the Paradise Meals !</h1>
-        <h2>The best meals in the world </h2>
-        
-    </main>
+      <Header />
 
-      <section>
-        {/* Afficher les résultats si ils existent */}
-        {meals ? (
-          // <> sert à créer un élément de type enfant
-          <>
-            {/* Afficher les résultats dans un tableau */}
-            {meals.map((meal) => {
-              return (
-                <article className="meal-card" key={meal.strMeal}>
-                  <h2><em>{meal.strMeal}</em></h2>
-                  <img className="meal-image" src={meal.strMealThumb} alt={meal.strMeal} />
-                  <table className="meal-info">
-                    <tbody>
-                      <tr>
-                        <td><strong>Instructions:</strong></td>
-                        <td>{meal.strInstructions}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Ingrédients:</strong></td>
-                        <td>{meal.strIngredient1}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Mesures:</strong></td>
-                        <td>{meal.strMeasure1}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </article>
-              );
-            })}
-          </>
-          ) : (
-            // Afficher un message en cas d'absence de résultats ou de chargement en cours
-            <p>Recettes en cours de récupération</p>
-        )}
-        <RandomMealsPage />
-      </section>
+      <main>
+        {meals.map((meal) => {
+          return <MealCard key={meal.idMeal} meal={meal} />;
+        })}
+      </main>
+
+      <RandomMealsPage />
+
       <Footer />
     </>
   );
