@@ -12,8 +12,8 @@ const Header = () => {
 
     return (
       <header>
-        <h1>Les recettes de Roberto</h1>
-
+        <a href="http://localhost:5173"><img src="https://www.themealdb.com/images/logo.png" alt="Logo de meal" /></a>
+        
         <nav>
           <ul>
             <li>
