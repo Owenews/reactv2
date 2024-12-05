@@ -5,29 +5,39 @@ import MealCard from "../components/MealCard";
 import { useSearchParams } from "react-router-dom";
 
 const MealsPage = () => {
-  const [searchMeal, setSearchMeal] = useState([]);
+  const [searchMeal, setSearchMeal] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
 
   useEffect(() => {
     (async () => {
-      // Récupérer des recettes commençant par "a"
-      const mealsResponse = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=a"); 
+      // Récupérer la recette recherchée
+      const mealsResponse = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + query); 
       // Récupérer les données au format JSON
       const mealsData = await mealsResponse.json();
 
-      // Limiter le nombre de résultats à 10 recettes
       setSearchMeal(mealsData.meals);
+      setIsLoading(false);
     })();
   }, [query]);
 
-
-  if (!searchMeal) {
+  if (isLoading) {
     return (
       <>
         <Header />
         <p>En cours de chargement !</p>
+        <Footer />
+      </>
+    );
+  }
+
+  if (!isLoading && !searchMeal) {
+    return (
+      <>
+        <Header />
+        <p>Pas de recettes !</p>
         <Footer />
       </>
     );
