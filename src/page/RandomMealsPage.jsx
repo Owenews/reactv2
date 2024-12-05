@@ -1,27 +1,15 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import useGetRandomMeal from "../hook/useGetRandomMeal.js";
+import { useState } from "react";
 
 const RandomMealsPage = () => {
-    const [randomMeal, setRandomMeal] = useState(null);
+  const [reload, setReload] = useState(false);
+  const { randomMeal } = useGetRandomMeal(reload);
 
-    // Fetch meal function
-    const fetchCocktail = async () => {
-      const randomMealResponse = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
-      const randomMealData = await randomMealResponse.json();
-      setRandomMeal(randomMealData.meals[0]);
-    };
+  const handleChangeRandomMeal = () => {
+    setReload(!reload);
+  };
   
-    // useEffect to fetch a random meal on component mount
-    useEffect(() => {
-      fetchCocktail();
-    }, []); // Empty dependency array means it runs only once, when the component mounts
-  
-    const handleChangeRandomMeal = () => {
-      fetchCocktail(); // Fetch a new random meal when the button is clicked
-    };
-
-
   return (
     <section>        
         <h2>Random cocktail</h2>
