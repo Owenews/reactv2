@@ -31,7 +31,7 @@ const Header = () => {
 
           <form method="get" onSubmit={handleSubmitSearch}>
             <label>
-               <input type="search" name="query" placeholder="Search for a meal" />
+               <input type="search" name="query" placeholder="Search for a meal" required />
             </label>
 
             <input type="submit" />
